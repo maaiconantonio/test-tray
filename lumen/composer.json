@@ -1,0 +1,10 @@
+{
+    "require": {
+        "wn/lumen-generators": "^1.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    }
+}
