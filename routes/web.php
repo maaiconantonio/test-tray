@@ -26,6 +26,7 @@ $router->delete('/vendor/{id}', 'VendorController@delete');
 $router->get('/sale', 'SaleController@index');
 $router->get('/sale/{id}', 'SaleController@show');
 $router->get('/sale/vendor/{id}', 'SaleController@showByVendor');
+$router->get('/sale/today/true', 'SaleController@showToday');
 $router->post('/sale', 'SaleController@create');
 $router->put('/sale/{id}', 'SaleController@update');
 $router->delete('/sale/{id}', 'SaleController@delete');

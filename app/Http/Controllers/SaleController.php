@@ -31,9 +31,25 @@ class SaleController extends Controller
 				"msg" => utf8_encode("Vendedor não encontrado")
 			]);
 		}
-
 		$sale = Sale::join("vendor", "vendor.id", "=", "sale.vendor_id")
 			->where("vendor_id", $vendor->id)
+			->select([
+				"sale.id",
+				"sale.vendor_id",
+				"vendor.name",
+				"vendor.mail",
+				"sale.commission_value",
+				"sale.sale_value",
+				DB::raw("DATE_FORMAT(sale.created_at, '%d/%m/%Y') AS created_at")
+			])->get();
+		return response()->json($sale);
+	}
+
+	public function showToday(Request $request, $today = true)
+	{
+		$sale = Sale::join("vendor", "vendor.id", "=", "sale.vendor_id")
+			->where(DB::raw("DATE_FORMAT(sale.created_at, '%Y-%m-%d')"), "=", date('Y-m-d'))
+			->orderBy("vendor_id", "ASC")
 			->select([
 				"sale.id",
 				"sale.vendor_id",
